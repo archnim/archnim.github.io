@@ -90,7 +90,7 @@
 
 </ul>
 <ul class="simple nested-toc-section">doOnce
-  <li><a class="reference" href="#doOnce%2Cproc%29%2Cbool" title="doOnce(todo: proc (); cond: bool)">doOnce(todo: proc (); cond: bool)</a></li>
+  <li><a class="reference" href="#doOnce%2Cproc%29%2Cbool%2Cint" title="doOnce(todo: proc (); cond: var bool; ms: int or float = 5)">doOnce(todo: proc (); cond: var bool; ms: int or float = 5)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">every
@@ -102,7 +102,8 @@
 
 </ul>
 <ul class="simple nested-toc-section">once
-  <li><a class="reference" href="#once%2Cbool%2Cproc%29" title="once(cond: bool; todo: proc ())">once(cond: bool; todo: proc ())</a></li>
+  <li><a class="reference" href="#once%2Cbool%2C%2Cproc%29" title="once(cond: var bool; ms: int or float; todo: proc ())">once(cond: var bool; ms: int or float; todo: proc ())</a></li>
+<li><a class="reference" href="#once%2Cbool%2Cproc%29" title="once(cond: var bool; todo: proc ())">once(cond: var bool; todo: proc ())</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">pause
@@ -281,12 +282,11 @@ nimble install sunk</pre></p>
 
 </div>
 <div id="doOnce-procs-all">
-  <div id="doOnce,proc),bool">
-  <dt><pre><span class="Keyword">proc</span> <a href="#doOnce%2Cproc%29%2Cbool"><span class="Identifier">doOnce</span></a><span class="Other">(</span><span class="Identifier">todo</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">cond</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">TimeEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <div id="doOnce,proc),bool,int">
+  <dt><pre><span class="Keyword">proc</span> <a href="#doOnce%2Cproc%29%2Cbool%2Cint"><span class="Identifier">doOnce</span></a><span class="Other">(</span><span class="Identifier">todo</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">cond</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">ms</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Keyword">or</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="DecNumber">5</span><span class="Other">)</span></pre></dt>
   <dd>
     
-    Checks <tt class="docutils literal"><span class="pre"><span class="Identifier">cond</span></span></tt> in background every 5 milliseconds and executes actions passed as <tt class="docutils literal"><span class="pre"><span class="Identifier">todo</span></span></tt> once it's true
+    Checks <tt class="docutils literal"><span class="pre"><span class="Identifier">cond</span></span></tt> in background every <tt class="docutils literal"><span class="pre"><span class="Identifier">ms</span></span></tt> milliseconds and executes actions passed as <tt class="docutils literal"><span class="pre"><span class="Identifier">todo</span></span></tt> once it's true
 <p><strong class="examples_text">Example:</strong></p>
 <pre class="listing"><span class="Keyword">import</span> <span class="Identifier">threadpool</span><span class="Punctuation">,</span> <span class="Identifier">os</span>
 
@@ -341,10 +341,29 @@ nimble install sunk</pre></p>
 
 </div>
 <div id="once-procs-all">
-  <div id="once,bool,proc)">
-  <dt><pre><span class="Keyword">proc</span> <a href="#once%2Cbool%2Cproc%29"><span class="Identifier">once</span></a><span class="Other">(</span><span class="Identifier">cond</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">todo</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Other">)</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
-                                       <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">TimeEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span><span class="Other">,</span>
-                                       <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <div id="once,bool,,proc)">
+  <dt><pre><span class="Keyword">proc</span> <a href="#once%2Cbool%2C%2Cproc%29"><span class="Identifier">once</span></a><span class="Other">(</span><span class="Identifier">cond</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">ms</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Keyword">or</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">todo</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Other">)</span><span class="Other">)</span></pre></dt>
+  <dd>
+    
+    Checks <tt class="docutils literal"><span class="pre"><span class="Identifier">cond</span></span></tt> in background every <tt class="docutils literal"><span class="pre"><span class="Identifier">ms</span></span></tt> milliseconds and executes actions passed as <tt class="docutils literal"><span class="pre"><span class="Identifier">todo</span></span></tt> once it's true
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">import</span> <span class="Identifier">threadpool</span><span class="Punctuation">,</span> <span class="Identifier">os</span>
+
+<span class="Keyword">var</span> <span class="Identifier">hasFinished</span> <span class="Operator">=</span> <span class="Identifier">false</span>
+
+<span class="Keyword">proc</span> <span class="Identifier">longOps</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Comment"># let's fake long operations with sleep</span>
+  <span class="Identifier">sleep</span> <span class="DecNumber">5_000</span>
+  <span class="Identifier">hasFinished</span> <span class="Operator">=</span> <span class="Identifier">true</span>
+
+<span class="Identifier">spawn</span> <span class="Identifier">longOps</span><span class="Punctuation">(</span><span class="Punctuation">)</span>
+<span class="Identifier">once</span><span class="Punctuation">(</span><span class="Identifier">hasFinished</span><span class="Punctuation">,</span> <span class="DecNumber">10</span><span class="Punctuation">)</span> <span class="Keyword">do</span><span class="Punctuation">(</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">echo</span> <span class="StringLit">&quot;Finished !&quot;</span></pre>
+    
+  </dd>
+</div>
+<div id="once,bool,proc)">
+  <dt><pre><span class="Keyword">proc</span> <a href="#once%2Cbool%2Cproc%29"><span class="Identifier">once</span></a><span class="Other">(</span><span class="Identifier">cond</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">todo</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Other">)</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">TimeEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
     Checks <tt class="docutils literal"><span class="pre"><span class="Identifier">cond</span></span></tt> in background every 5 milliseconds and executes actions passed as <tt class="docutils literal"><span class="pre"><span class="Identifier">todo</span></span></tt> once it's true
@@ -439,7 +458,7 @@ nimble install sunk</pre></p>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2023-05-06 18:16:39 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2023-05-07 00:39:45 UTC</small>
       </div>
     </div>
   </div>
